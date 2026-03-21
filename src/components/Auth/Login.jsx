@@ -7,6 +7,8 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("Form submitted")
+        setEmail("")
+        setPassword("")
     }
 
     return (
@@ -17,6 +19,7 @@ function Login() {
                     className='flex flex-col gap-4 items-center justify-center'
                 >
                     <input
+                        value={email}
                         onChange={(e) => { setEmail(e.target.value) }}
                         required
                         className='text-white outline-none bg-transparent border-2 border-emerald-600 py-3 px-5 text-lg rounded-full placeholder:text-gray-400 w-72'
@@ -25,6 +28,8 @@ function Login() {
                     />
 
                     <input
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value) }}
                         required
                         className='text-white outline-none bg-transparent border-2 border-emerald-600 py-3 px-5 text-lg rounded-full placeholder:text-gray-400 w-72'
                         type="password"
