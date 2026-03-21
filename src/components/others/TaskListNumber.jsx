@@ -1,27 +1,33 @@
 import React from 'react'
 
 const TaskListNumber = () => {
+    const data = [
+        { color: 'bg-red-400', title: 'New Task' },
+        { color: 'bg-blue-400', title: 'Completed Task' },
+        { color: 'bg-green-400', title: 'Accepted Task' },
+        { color: 'bg-yellow-400', title: 'Failed Task' },
+    ]
+
     return (
-        <div className='flex mt-10 justify-between gap-5 screen'>
-            <div className='rounded-xl w-[45%] py-6 px-10 bg-red-400'>
-                <h1 className='text-3xl font-semibold'>0</h1>
-                <h3 className='text-xl font-medium'>New Task</h3>
-            </div>
-
-             <div className='rounded-xl w-[45%] py-6 px-10 bg-blue-400'>
-                <h1 className='text-3xl font-semibold'>0</h1>
-                <h3 className='text-xl font-medium'>New Task</h3>
-            </div>
-
-             <div className='rounded-xl w-[45%] py-6 px-10 bg-green-400'>
-                <h1 className='text-3xl font-semibold'>0</h1>
-                <h3 className='text-xl font-medium'>New Task</h3>
-            </div>
-
-             <div className='rounded-xl w-[45%] py-6 px-10 bg-yellow-400'>
-                <h1 className='text-3xl font-semibold'>0</h1>
-                <h3 className='text-xl font-medium'>New Task</h3>
-            </div>
+        <div
+            className="
+                grid gap-5 mt-10
+                grid-cols-1 
+                sm:grid-cols-2 
+                lg:grid-cols-4
+            "
+        >
+            {data.map((item, i) => (
+                <div
+                    key={i}
+                    className={`rounded-xl py-6 px-6 sm:px-8 ${item.color}`}
+                >
+                    <h1 className='text-2xl sm:text-3xl font-semibold'>0</h1>
+                    <h3 className='text-lg sm:text-xl font-medium'>
+                        {item.title}
+                    </h3>
+                </div>
+            ))}
         </div>
     )
 }
