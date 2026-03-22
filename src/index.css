@@ -17,4 +17,18 @@ body{
 
 .hidden-scrollbar::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
+}/* Hide scrollbar but allow scroll */
+
+
+.scrollbar-hover::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-hover::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.scrollbar-hover:hover::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
 }

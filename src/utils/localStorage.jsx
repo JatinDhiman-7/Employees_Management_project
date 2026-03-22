@@ -1,6 +1,9 @@
+import { useEffect } from "react"
+
 const employees = [
     {
         "id": "EMP001",
+        "firstname": "Arjun",
         "email": "employee1@example.com",
         "password": "123",
         "tasks": [
@@ -34,10 +37,17 @@ const employees = [
                 "taskDate": "2026-03-18",
                 "category": "Database"
             }
-        ]
+        ],
+        "taskNumber": {
+            "active": 3,
+            "newTask": 1,
+            "completed": 3,
+            "failed": 1
+        }
     },
     {
         "id": "EMP002",
+        "firstname": "Priya",
         "email": "employee2@example.com",
         "password": "123",
         "tasks": [
@@ -71,10 +81,17 @@ const employees = [
                 "taskDate": "2026-03-17",
                 "category": "Development"
             }
-        ]
+        ],
+        "taskNumber": {
+            "active": 1,
+            "newTask": 0,
+            "completed": 1,
+            "failed": 2
+        }
     },
     {
         "id": "EMP003",
+        "firstname": "Rohan",
         "email": "employee3@example.com",
         "password": "123",
         "tasks": [
@@ -108,10 +125,17 @@ const employees = [
                 "taskDate": "2026-03-19",
                 "category": "Marketing"
             }
-        ]
+        ],
+        "taskNumber": {
+            "active": 1,
+            "newTask": 0,
+            "completed": 3,
+            "failed": 0
+        }
     },
     {
         "id": "EMP004",
+        "firstname": "Sneha",
         "email": "employee4@example.com",
         "password": "123",
         "tasks": [
@@ -145,10 +169,17 @@ const employees = [
                 "taskDate": "2026-03-18",
                 "category": "Security"
             }
-        ]
+        ],
+        "taskNumber": {
+            "active": 1,
+            "newTask": 3,
+            "completed": 2,
+            "failed": 0
+        }
     },
     {
         "id": "EMP005",
+        "firstname": "Vikram",
         "email": "employee5@example.com",
         "password": "123",
         "tasks": [
@@ -182,12 +213,19 @@ const employees = [
                 "taskDate": "2026-03-19",
                 "category": "HR"
             }
-        ]
+        ],
+        "taskNumber": {
+            "active": 1,
+            "newTask": 3,
+            "completed": 1,
+            "failed": 2
+        }
     }
 ]
 
 const admin = [
     {
+        "firstname": "admin",
         "id": "ADMIN001",
         "email": "admin@example.com",
         "password": "123"
@@ -195,8 +233,10 @@ const admin = [
 ]
 
 export const setLocalStorage = () => {
+
     localStorage.setItem('employees', JSON.stringify(employees))
     localStorage.setItem('admin', JSON.stringify(admin))
+
 
 }
 

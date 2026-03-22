@@ -2,12 +2,14 @@ import React from 'react'
 import Header from '../others/Header'
 import TaskListNumber from '../others/TaskListNumber'
 import TaskList from '../TaskLists/TaskList'
-function EmployeeDashboard() {
+function EmployeeDashboard({data,onLogout}) {
+  console.log(data,"empliye")
+// use
     return (
         <div className='p-10 bg-[#1C1C1C] h-screen'>
-            <Header />
-            <TaskListNumber/>
-            <TaskList/>
+            <Header data={data} onLogout={onLogout}/>
+            <TaskListNumber data={data}/>
+            <TaskList data={data}/>
         </div>
     )
 }
