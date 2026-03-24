@@ -5,61 +5,95 @@ const AllTask = () => {
     const authData = useContext(AuthContext)
 
     return (
-        <div className="bg-[#111] p-4 sm:p-6 rounded-2xl mt-5 shadow-lg border border-gray-800">
-
+        <div className="bg-gradient-to-br from-[#0f172a] to-[#020617] p-5 sm:p-6 rounded-3xl mt-5 shadow-2xl border border-white/10 backdrop-blur-xl">
+            
             {/* Header */}
-            <div className="hidden md:grid grid-cols-5 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-semibold py-3 px-4 rounded-xl mb-4">
-                <h2>Employee</h2>
-                <h3>New Task</h3>
-                <h5>Active</h5>
-                <h5>Completed</h5>
-                <h5>Failed</h5>
+            <div className="hidden md:grid grid-cols-5 sticky top-0 z-10 bg-white/5 backdrop-blur-md text-gray-300 text-sm font-semibold py-3 px-4 rounded-xl mb-4 border border-white/10">
+                <div>Employee</div>
+                <div className="text-center">New</div>
+                <div className="text-center">Active</div>
+                <div className="text-center">Completed</div>
+                <div className="text-center">Failed</div>
             </div>
 
+            {/* Empty State */}
+            {!authData?.employees?.length && (
+                <div className="text-center py-14 text-gray-500">
+                    <div className="text-5xl mb-3">📂</div>
+                    <p className="text-lg font-medium tracking-wide">No tasks available</p>
+                </div>
+            )}
+
             {/* List */}
-            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+            <div className="space-y-4 max-h-[420px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-700/50 scrollbar-track-transparent">
                 {authData?.employees?.map((task, index) => (
                     <div
-                        key={index}
-                        className="bg-[#1c1c1c] hover:bg-[#262626] transition-all duration-200 border border-gray-800 rounded-xl p-4"
+                        key={task.id || index}
+                        className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:-translate-y-[2px]"
                     >
-
-                        {/* Mobile Layout */}
-                        <div className="md:hidden space-y-2">
-                            <h2 className="text-white font-semibold text-lg">
-                                {task.firstname}
-                            </h2>
-
-                            <div className="flex justify-between text-sm">
-                                <span className="text-blue-400">New:</span>
-                                <span className="text-white">{task.taskNumber.newTask}</span>
+                        {/* Mobile */}
+                        <div className="md:hidden space-y-3">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-white font-semibold text-lg truncate">
+                                    {task.firstname} {task.lastname || ''}
+                                </h2>
+                                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white shadow-md">
+                                    👤
+                                </div>
                             </div>
 
-                            <div className="flex justify-between text-sm">
-                                <span className="text-yellow-400">Active:</span>
-                                <span className="text-white">{task.taskNumber.active}</span>
+                            <div className="grid grid-cols-2 gap-4 pt-2 border-t border-white/10">
+                                {[
+                                    { label: "New", value: task.taskNumber.newTask, color: "blue" },
+                                    { label: "Active", value: task.taskNumber.active, color: "yellow" },
+                                    { label: "Completed", value: task.taskNumber.completed, color: "green" },
+                                    { label: "Failed", value: task.taskNumber.failed, color: "red" }
+                                ].map((item, i) => (
+                                    <div key={i} className="text-xs text-gray-400 flex justify-between">
+                                        <span>{item.label}:</span>
+                                        <span className="font-mono text-white">{item.value}</span>
+                                    </div>
+                                ))}
                             </div>
 
-                            <div className="flex justify-between text-sm">
-                                <span className="text-green-400">Completed:</span>
-                                <span className="text-white">{task.taskNumber.completed}</span>
-                            </div>
-
-                            <div className="flex justify-between text-sm">
-                                <span className="text-red-400">Failed:</span>
-                                <span className="text-white">{task.taskNumber.failed}</span>
+                            {/* Progress */}
+                            <div className="space-y-2 pt-2">
+                                {[
+                                    { val: task.taskNumber.newTask, color: "bg-blue-400" },
+                                    { val: task.taskNumber.active, color: "bg-yellow-400" }
+                                ].map((bar, i) => (
+                                    <div key={i} className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                        <div
+                                            className={`h-full ${bar.color} rounded-full transition-all duration-500`}
+                                            style={{ width: `${Math.min((bar.val / 10) * 100, 100)}%` }}
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Desktop Layout */}
-                        <div className="hidden md:grid grid-cols-5 items-center text-sm text-white">
-                            <h2 className="font-medium">{task.firstname}</h2>
-                            <h3 className="text-blue-400">{task.taskNumber.newTask}</h3>
-                            <h5 className="text-yellow-400">{task.taskNumber.active}</h5>
-                            <h5 className="text-green-400">{task.taskNumber.completed}</h5>
-                            <h5 className="text-red-400">{task.taskNumber.failed}</h5>
-                        </div>
+                        {/* Desktop */}
+                        <div className="hidden md:grid grid-cols-5 items-center text-sm gap-4">
+                            <div className="text-white font-medium truncate">
+                                {task.firstname} {task.lastname || ''}
+                            </div>
 
+                            <div className="text-center text-blue-400 font-semibold">
+                                {task.taskNumber.newTask}
+                            </div>
+
+                            <div className="text-center text-yellow-400 font-semibold">
+                                {task.taskNumber.active}
+                            </div>
+
+                            <div className="text-center text-green-400 font-semibold">
+                                {task.taskNumber.completed}
+                            </div>
+
+                            <div className="text-center text-red-400 font-semibold">
+                                {task.taskNumber.failed}
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

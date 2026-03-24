@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TaskListNumber = ({ data }) => {
-    console.log(data);
+    console.log(data,"taskList");
 
     return (
         <div className="grid gap-5 mt-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">

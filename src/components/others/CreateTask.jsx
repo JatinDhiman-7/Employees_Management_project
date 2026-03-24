@@ -30,16 +30,20 @@ const CreateTask = () => {
 
     // 3️⃣ Read employees from localStorage
     const data = JSON.parse(localStorage.getItem('employees')) || [];
-
+    console.log(data,"cerateTask")
     // 4️⃣ Find the employee and add the task
     let assigned = false;
     const updatedData = data.map(emp => {
         if (emp.firstname.toLowerCase() === asignTo.toLowerCase()) {
             assigned = true;
+            console.log(emp,"Cuuremploye")
+            console.log([...emp.tasks, taskObj])
             return { ...emp, tasks: [...emp.tasks, taskObj] }; // immutable update
         }
         return emp;
     });
+    console.log(updatedData,"uodatehone ke bad")
+    localStorage.setItem('employees', JSON.stringify(updatedData));
 
     if (!assigned) {
         alert("Employee not found");
@@ -47,7 +51,6 @@ const CreateTask = () => {
     }
 
     // 5️⃣ Write updated data back to localStorage
-    localStorage.setItem('employees', JSON.stringify(updatedData));
 
     // 6️⃣ Reset form fields
     setTaskTitle('');
